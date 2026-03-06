@@ -1,0 +1,220 @@
+:root {
+    --bg-void: #030a05;        /* Deepest black/green */
+    --bg-panel: #0a140d;       /* Slightly lighter panel background */
+    --text-main: #e0f2e6;      /* Off-white with a hint of green for reading */
+    --text-dim: #8ab899;       /* Dimmer text for secondary info */
+    --matrix-bright: #00ff66;  /* The classic bright matrix green */
+    --matrix-mid: #00cc52;
+    --matrix-dark: #003314;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cascadia Code','JetBrains Mono', 'Courier New', monospace; /* Engineering feel */
+}
+
+/* --- THE ZOOM EFFECT --- */
+html {
+    font-size: 110%; /* Scales up all text, padding, and margins automatically */
+}
+
+body {
+    background-color: var(--bg-void);
+    color: var(--text-main);
+    line-height: 1.7;
+    position: relative;
+}
+
+/* The subtle animated background grid */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: 
+        linear-gradient(rgba(0, 255, 102, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 102, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: -1;
+    animation: drift 30s linear infinite;
+}
+
+@keyframes drift {
+    0% { background-position: 0 0; }
+    100% { background-position: 30px 30px; }
+}
+
+/* --- THE WIDER CONTAINER --- */
+.container {
+    max-width: 1100px; /* Increased to give diagrams more breathing room */
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+header {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: var(--bg-panel);
+    border-radius: 4px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--matrix-mid);
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+    color: var(--matrix-bright);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--matrix-dark);
+    padding-bottom: 0.5rem;
+}
+
+h4 {
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+}
+
+.text-glow {
+    color: var(--matrix-bright);
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.6), 0 0 20px rgba(0, 255, 102, 0.4);
+}
+
+.glow-border {
+    border: 1px solid var(--matrix-mid);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
+}
+
+.content-block {
+    background-color: var(--bg-panel);
+    padding: 2rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--matrix-dark);
+    transition: border-left-color 0.3s;
+}
+
+.content-block:hover {
+    border-left-color: var(--matrix-bright);
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+ul, ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+    color: var(--text-dim);
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li strong {
+    color: var(--matrix-bright);
+}
+
+.logic-steps li {
+    background: rgba(0, 51, 20, 0.3);
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    border-left: 2px solid var(--matrix-mid);
+    border-radius: 0 4px 4px 0;
+}
+
+/* --- SYMMETRICAL GRID AND CARD LAYOUT --- */
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    align-items: stretch; /* Forces both cards to be symmetrically tall */
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    border: 1px dashed var(--matrix-dark);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column; /* Allows us to push the images to the bottom */
+    height: 100%;
+}
+
+.card p {
+    margin-bottom: 1.5rem;
+}
+
+/* Pushes the images to the bottom, leaving empty space safely in the middle */
+.card .svg-placeholder:first-of-type {
+    margin-top: auto; 
+}
+
+/* --- RESPONSIVE IMAGE PLACEHOLDERS --- */
+.svg-placeholder {
+    width: 100%;
+    height: auto; 
+    min-height: 150px; /* Keeps a nice box shape before the image loads */
+    background-color: #000;
+    border: 1px dashed var(--matrix-mid);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1.5rem; /* Ensures consistent spacing between stacked images */
+    position: relative;
+    overflow: hidden;
+}
+
+.svg-placeholder.large {
+    min-height: 300px; 
+}
+
+.svg-placeholder span {
+    color: var(--matrix-dark);
+    font-size: 0.9rem;
+    z-index: 2;
+    position: absolute; /* Keeps placeholder text centered behind the image */
+}
+
+.svg-placeholder img {
+    width: 100%;
+    height: auto; /* Image dictates the height symmetrically */
+    display: block; /* Removes weird spacing below images */
+    z-index: 3;
+    position: relative;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 102, 0.4)); /* Matrix glow for your SVGs */
+}
+
+/* --- ANIMATIONS --- */
+.pulse-border {
+    animation: borderPulse 3s infinite;
+}
+
+@keyframes borderPulse {
+    0% { border-color: rgba(0, 255, 102, 0.2); }
+    50% { border-color: rgba(0, 255, 102, 0.8); box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.1); }
+    100% { border-color: rgba(0, 255, 102, 0.2); }
+}

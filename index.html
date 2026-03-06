@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Clipper Circuits</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <div class="container">
+        <header class="glow-border">
+            <h1>Analog Electronics // <span class="text-glow">Module 1</span></h1>
+            <h2>Wave Shaping: The Clipper Circuit</h2>
+            <p class="subtitle">Control the flow. A clipper is a circuit designed to prevent a signal from exceeding a predetermined voltage level without distorting the remaining part of the applied waveform.</p>
+        </header>
+
+        <main>
+            <section class="content-block">
+                <h3>1. The Core Logic: How do they work?</h3>
+                <p>A clipper is a circuit having a diode, which acts like a one-way smart switch.</p>
+                <ul>
+                    <li><strong>Forward Biased (Switch CLOSED):</strong> The diode turns ON when the voltage pushes through it. It acts like a <strong>short</strong> circuit (or a tiny 0.7V drop for practical silicon).</li>
+                    <li><strong>Reverse Biased (Switch OPEN):</strong> The diode is OFF. It acts like an <strong>open</strong> circuit. The signal flows right past it to the output, untouched.</li>
+                </ul>
+            </section>
+
+            <section class="content-block">
+                <h3>2. Positive Clippers</h3>
+                <p>These circuits chop off the positive half-cycle of the input signal. The diode is oriented to conduct during the positive swing.</p>
+                
+                <div class="grid-2-col">
+                    <div class="card">
+                        <h4><u>Series Positive Clipper</u></h4>
+                        <p>Diode is in series with the load, pointing away from the input. It blocks the positive half-cycle and allows the negative half-cycle to pass.<br><br>
+                            During +ve half cycle:
+                            <ul> 
+                                <li>Diode is reverse biased.</li>
+                                <li>Since load resistance is in series to the diode, output voltage becomes zero.</li>
+                            </ul>
+                            <br>
+                            During -ve half cycle:
+                            <ul> 
+                                <li>Diode is forward biased.</li>
+                                <li>Since load resistance is in series to the diode, the -ve part of the voltage conducts through the load.</li>
+                            </ul>
+                        </p>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/series-positive-circuit.svg" alt="Series Positive Circuit Diagram">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/series-positive-waveform.svg" alt="Input and Output Waveforms">
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><u>Shunt Positive Clipper</u></h4>
+                        <p> Diode is parallel to the load, pointing towards ground. It shorts the positive half-cycle to ground and forces the negative half-cycle to the load.<br><br>
+                            During +ve half cycle:
+                            <ul> 
+                                <li>Diode is forward biased, hence act as a short circuit.</li>
+                                <li>Since load resistance is in parallel to the diode, current takes the low resistance path of the diode, instead of the load.</li>
+                                <li>Hence, the +ve part does not go through the load.</li>
+                            </ul>
+                            <br>
+                            During -ve half cycle:
+                            <ul> 
+                                <li>Diode is reverse biased, hence act as an open circuit.</li>
+                                <li>Since load resistance is in parallel to the diode, current takes the path of the load.</li>
+                                <li>Hence, the -ve part goes through the load.</li>
+                            </ul>
+                        </p>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/shunt-positive-circuit.svg" alt="Shunt Positive Circuit Diagram">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/shunt-positive-waveform.svg" alt="Input and Output Waveforms">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-block">
+                <h3>3. Negative Clippers</h3>
+                <p>Diode is in series with the load, pointing away from the input.<br><br>
+                </p>
+
+                <div class="grid-2-col">
+                    <div class="card">
+                        <h4>Series Negative Clipper</h4>
+                        <p>Diode is in series with the load, pointing towards the input. It blocks the negative half-cycle and allows the positive half-cycle to pass.<br><br>
+                        During +ve half cycle:
+                            <ul> 
+                                <li>Diode is reverse biased.</li>
+                                <li>Since load resistance is in series to the diode, output voltage becomes zero.</li>
+                            </ul>
+                            <br>
+                            During +ve half cycle:
+                            <ul> 
+                                <li>Diode is forward biased.</li>
+                                <li>Since load resistance is in series to the diode, the -ve part of the voltage conducts through the load.</li>
+                            </ul>
+
+                        </p>
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/series-negative-circuit.svg" alt="Series Negative Circuit Diagram">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/series-negative-waveform.svg" alt="Input and Output Waveforms">
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Shunt Negative Clipper</h4>
+                        <p> Diode is parallel to the load, pointing towards ground. It shorts the negative half-cycle to ground and forces the positive half-cycle to the load.<br><br>
+                            During +ve half cycle:
+                            <ul> 
+                                <li>Diode is reverse biased, hence act as an open circuit.</li>
+                                <li>Since load resistance is in parallel to the diode, current takes the path of the load.</li>
+                                <li>Hence, the +ve part goes through the load.</li>
+                            </ul>
+
+                            <br>
+                            During -ve half cycle:
+                            <ul> 
+                                <li>Diode is forward biased, hence act as a short circuit.</li>
+                                <li>Since load resistance is in parallel to the diode, current takes the low resistance path of the diode, instead of the load.</li>
+                                <li>Hence, the -ve part does not go through the load.</li>
+                            </ul>
+                        </p>
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/shunt-negative-circuit.svg" alt="Shunt Negative Circuit Diagram">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/shunt-negative-waveform.svg" alt="Input and Output Waveforms">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-block glow-border">
+                <h3>4. Biased Clippers: Setting Custom Limits</h3>
+                <p>What if we don't want to clip exactly at 0V (ideal) or 0.7V (practical)? By adding a DC battery (V<sub>B</sub>) in series with the diode, we shift the exact voltage level at which the diode decides to turn ON. The clipping level becomes a function of V<sub>B</sub> and the diode's built-in potential.</p>
+            </section>
+
+            <section class="content-block">
+                <h3>5. Positive Biased Clippers</h3>
+                <p>Clipping the positive half-cycle, but shifted by a DC voltage source.</p>
+
+                <div class="grid-2-col">
+                    <div class="card">
+                        <h4>Positive Bias (+ve Terminal Up)</h4>
+                        <p>The battery opposes the input voltage. The diode only conducts when V<sub>in</sub> exceeds V<sub>B</sub> + 0.7V. Clips everything above this level.</p>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-pos-circuit-pos-up.svg" alt="Biased Positive Circuit (+ve up)">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-pos-waveform-pos-up.svg" alt="Biased Positive Waveforms (+ve up)">
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Positive Bias (-ve Terminal Up)</h4>
+                        <p>The battery aids the input voltage. The diode conducts even for small positive inputs. Clips everything above -V<sub>B</sub> + 0.7V.</p>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-pos-circuit-neg-up.svg" alt="Biased Positive Circuit (-ve up)">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-pos-waveform-neg-up.svg" alt="Biased Positive Waveforms (-ve up)">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-block">
+                <h3>6. Negative Biased Clippers</h3>
+                <p>Clipping the negative half-cycle, shifted by a DC voltage source.</p>
+
+                <div class="grid-2-col">
+                    <div class="card">
+                        <h4>Negative Bias (+ve Terminal Up)</h4>
+                        <p>The battery opposes the negative swing. Clips everything below V<sub>B</sub> - 0.7V.</p>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-neg-circuit-pos-up.svg" alt="Biased Negative Circuit (+ve up)">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-neg-waveform-pos-up.svg" alt="Biased Negative Waveforms (+ve up)">
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Negative Bias (-ve Terminal Up)</h4>
+                        <p>The battery aids the negative swing. Clips everything below -V<sub>B</sub> - 0.7V.</p>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-neg-circuit-neg-up.svg" alt="Biased Negative Circuit (-ve up)">
+                        </div>
+                        
+                        <div class="svg-placeholder pulse-border">
+                            <img src="assets/biased-neg-waveform-neg-up.svg" alt="Biased Negative Waveforms (-ve up)">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>
